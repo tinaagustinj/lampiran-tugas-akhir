@@ -40,7 +40,27 @@ $datauser = mysqli_fetch_array($user);
 			$jenis_kategori = $_POST['jenis_kategori'];
 			$tanggal = date('y-m-d h:i:s');
 			
-			// buat query
+			$sql9 = "SELECT * FROM data_kategori WHERE jenis_kategori='$jenis_kategori'";
+			$cek = mysqli_query($connect, $sql9);
+		 
+			if(mysqli_num_rows($cek) > 0){
+				
+				echo "<script>
+						alert('Gagal!');
+						document.location='tabelkategori.php?status=gagal';
+					</script>";
+		 
+			} else {
+		 
+				$sql = "INSERT INTO data_kategori VALUES (' ', '$jenis_kategori', '$tanggal', 'Ada')";
+				$query = mysqli_query($connect, $sql);
+		 
+				echo "<script>
+						alert('Sukses Menambahkan!');
+						document.location='tabelkategori.php?status=sukses';
+					</script>";
+			}
+			/*// buat query
 			$sql = "INSERT INTO data_kategori VALUES (' ', '$jenis_kategori', '$tanggal', 'Ada')";
 			$query = mysqli_query($connect, $sql);
 			
@@ -55,7 +75,7 @@ $datauser = mysqli_fetch_array($user);
 						alert('Gagal!');
 						document.location='tabelkategori.php';
 					</script>";
-			}
+			}	*/
 		}
 		
 		
@@ -86,7 +106,7 @@ $datauser = mysqli_fetch_array($user);
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Data Kategori</title>
+    <title>Data Kategori Barang</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -143,7 +163,7 @@ $datauser = mysqli_fetch_array($user);
                         </li>
                         <li class="active">
                             <a href="tabelkategori.php">
-                                <i class="fas fa-reorder"></i>Data Kategori</a>
+                                <i class="fas fa-reorder"></i>Data Kategori Barang</a>
                         </li>
                         <li>
                         <a class="js-arrow" href="#">
@@ -281,7 +301,7 @@ $datauser = mysqli_fetch_array($user);
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-20">Data Kategori</h3>
+                                <h3 class="title-5 m-b-20">Data Kategori Barang</h3>
                                 <div class="table-data__tool">
                                     
                                 </div>
@@ -330,7 +350,7 @@ $datauser = mysqli_fetch_array($user);
 							<div class="col-lg-5">
                                 <div class="card">
                                     <div class="card-header">
-                                        <strong>Formulir Data Kategori</strong>
+                                        <strong>Formulir Data Kategori Barang</strong>
                                     </div>
                                     <div class="card-body card-block">
                                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
